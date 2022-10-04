@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Text Processing</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+
+      <div class="container mt-4 d-flex flex-row justify-content-between">
+        <div class="left shadow-lg p-3 mb-5 bg-body rounded border border-dark rounded-5" style=" width:49%; height:70vh">
+            <h2>Encryption</h2>
+            <div class="m-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Plain Text</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="11"></textarea>
+                <button type="button" class="btn btn-primary mt-2" onclick="handleEncrypt()">Encrypt</button>
+            </div>
+            
+        </div>
+
+        <div class="right shadow-lg p-3 mb-5 bg-body rounded border border-dark rounded-5" style=" width:49%">
+            <h2>Decryption</h2>
+            <div class="m-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Encrypted Text</label>
+                <textarea class="form-control" id="exampleFormControlTextarea2" rows="11"></textarea>
+                <button  type="button" class="btn btn-primary mt-2" onclick="handleDecrypt()">Decrypt</button>
+            </div>
+        </div>
+      </div>
+      
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <script>
+        function handleEncrypt() {
+            const text1=document.getElementById("exampleFormControlTextarea1").value
+            const text2=document.getElementById("exampleFormControlTextarea2")
+            
+            const myArray = text1.split(" ");
+           
+            
+            var deText1 = [];
+
+            for (let i = 0; i < myArray.length; i++) {
+                var temp = "";
+                var key = myArray[i].length;
+                for(let j =0; j< myArray[i].length; j++){
+                    var di = myArray[i].charCodeAt(j);
+                    var keyTemp=0;
+                    keyTemp = (di+key--);
+                    
+                    temp+= String.fromCharCode(keyTemp);
+                    
+                }
+                deText1.push(temp)
+              }
+
+              text2.value=deText1.join(" ");
+            
+          }
+
+        function handleDecrypt() {
+            const text2=document.getElementById("exampleFormControlTextarea2").value
+            const text1=document.getElementById("exampleFormControlTextarea1")
+
+            const myArray2 = text2.split(" ");
+            
+            
+            var deText2 = [];
+
+            for (let i = 0; i < myArray2.length; i++) {
+                var temp = "";
+                var key = myArray2[i].length;
+                for(let j =0; j< myArray2[i].length; j++){
+                    var di = myArray2[i].charCodeAt(j);
+                    var keyTemp=0;
+                    keyTemp = (di-key--);
+                    
+                    temp+= String.fromCharCode(keyTemp);
+                    
+                }
+                deText2.push(temp)
+              }
+
+
+            text1.value=deText2.join(" ");
+            
+          }
+    </script>
+</body>
+</html>
